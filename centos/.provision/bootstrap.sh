@@ -26,3 +26,14 @@ sudo rm scala-2.11.8.rpm
 #update db for locate tool
 sudo updatedb
 
+# set up nginx server
+sudo cp /vagrant/.provision/nginx/nginx.conf /etc/nginx/sites-available/site.conf
+sudo chmod 644 /etc/nginx/sites-available/site.conf
+sudo ln -s /etc/nginx/sites-available/site.conf /etc/nginx/sites-enabled/site.conf
+sudo service nginx restart
+
+# clean /var/www
+sudo rm -Rf /var/www
+
+# symlink /var/www => /vagrant
+ln -s /vagrant /var/www
