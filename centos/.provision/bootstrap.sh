@@ -27,13 +27,19 @@ sudo rm scala-2.11.8.rpm
 sudo updatedb
 
 # set up nginx server
-sudo cp /vagrant/.provision/nginx/nginx.conf /etc/nginx/sites-available/site.conf
-sudo chmod 644 /etc/nginx/sites-available/site.conf
-sudo ln -s /etc/nginx/sites-available/site.conf /etc/nginx/sites-enabled/site.conf
+sudo cp /vagrant/.provision/nginx/nginx.conf /etc/nginx/conf.d/site.conf
+sudo chmod 644 /etc/nginx/conf.d/site.conf
+#sudo ln -s /etc/nginx/sites-available/site.conf /etc/nginx/sites-enabled/site.conf
+
+sudo cp /vagrant/index.html /usr/share/nginx/html/public.html
+
 sudo service nginx restart
 
-# clean /var/www
-sudo rm -Rf /var/www
 
-# symlink /var/www => /vagrant
-ln -s /vagrant /var/www
+#sudo chown -R www-data:www-data /usr/share/nginx/html/*
+#sudo chmod -R 0755 /usr/share/nginx/html/*
+#sudo chown -R www-data:www-data /var/www/vagrant-test.local.com/public/index.html
+
+#in config file for nginx:
+#root /var/www/vagrant-test.local.com/public;
+#index index.html;
